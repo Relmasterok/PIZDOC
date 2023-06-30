@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class MovePlayer : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class MovePlayer : MonoBehaviour
     private float _moveVert;
     private float _roteHor;
     private float _roteVert;
+
+    private int score;
+
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -31,6 +35,15 @@ public class MovePlayer : MonoBehaviour
         {
             transform.Rotate(_roteVert, _roteHor, 0);
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0f);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Poison")
+        {
+            score++;
+            other.gameObject.SetActive(false);
         }
     }
 }
