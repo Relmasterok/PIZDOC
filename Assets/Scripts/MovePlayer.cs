@@ -14,6 +14,7 @@ public class MovePlayer : MonoBehaviour
     private float _moveVert;
     private float _roteHor;
     private float _roteVert;
+    public float _speedROT;
 
     public Text _scoreTEXT;
     private int score;
@@ -41,7 +42,7 @@ public class MovePlayer : MonoBehaviour
         _roteVert = -_joy_rotate.Vertical;
         if (_roteVert != 0 || _roteHor != 0)
         {
-            transform.Rotate(_roteVert, _roteHor, 0);
+            transform.Rotate(_roteVert*_speedROT, _roteHor*_speedROT, 0);
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0f);
         }
     }
