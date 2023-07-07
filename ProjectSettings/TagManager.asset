@@ -5,16 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
   - Poison
+  - Points
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
+  - coins
+  - NPC
+  - ROOMS
   - 
   - 
   - 
