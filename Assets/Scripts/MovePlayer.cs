@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MovePlayer : MonoBehaviour
 {
     private Rigidbody _rb;
     public Joystick _joy_speed;
     public Joystick _joy_rotate;
+
     public float _speed;
     private float _moveHor;
     private float _moveVert;
@@ -49,11 +51,16 @@ public class MovePlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Poison")
+        if (other.gameObject.tag == "Coin")
         {
             score++;
             other.gameObject.SetActive(false);
             _scoreTEXT.text = score.ToString();
+        }
+
+        if (other.gameObject.tag == "Enemy")
+        {
+            Application.LoadLevel("Menu");
         }
     }
 }

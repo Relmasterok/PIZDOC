@@ -90,5 +90,5 @@ public class NPC : MonoBehaviour
         if (_Pogona) _NPC.SetDestination(_PLAYER.position);
         if (!RayToScan()) _Pogona = false;
     }
-    
+
 }
