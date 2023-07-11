@@ -57,10 +57,5 @@ public class MovePlayer : MonoBehaviour
             other.gameObject.SetActive(false);
             _scoreTEXT.text = score.ToString();
         }
-
-        if (other.gameObject.tag == "Enemy")
-        {
-            Application.LoadLevel("Menu");
-        }
     }
 }
