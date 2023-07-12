@@ -17,4 +17,14 @@ public class MenuManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void Restart()
+    {
+        Application.LoadLevel(Application.loadedLevel);
+    }
+
+    public void ExitMenu()
+    {
+        Application.LoadLevel("Menu");
+    }
 }
