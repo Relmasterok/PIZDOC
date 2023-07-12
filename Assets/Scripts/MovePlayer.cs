@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class MovePlayer : MonoBehaviour
 {
-    private Rigidbody _rb;
     public Joystick _joy_speed;
     public Joystick _joy_rotate;
 
@@ -21,25 +20,21 @@ public class MovePlayer : MonoBehaviour
     public Text _scoreTEXT;
     private int score;
 
-    void Start()
-    {
-        _rb = GetComponent<Rigidbody>();
-    }
+
 
     void FixedUpdate()
     {
         _moveHor = _joy_speed.Horizontal;
         _moveVert = _joy_speed.Vertical;
-        if (_moveVert > 0) transform.localPosition += transform.right * _moveHor * _speed;
-        if (_moveVert < 0) transform.localPosition += transform.right * _moveHor * _speed;
-        if (_moveHor > 0) transform.localPosition += transform.forward * _moveVert * _speed;
-        if (_moveHor < 0) transform.localPosition += transform.forward * _moveVert * _speed;
-        //if (_moveHor != 0 || _moveVert != 0)
-        //{
-        //    transform.localPosition += transform.forward * _moveHor *_speed;
-        //    transform.localPosition += transform.right * _moveVert *_speed;
-        //    //_rb.velocity = new Vector3(_moveHor * _speed, 0, _moveVert * _speed);
-        //}
+        //if (_moveVert > 0) transform.localPosition += transform.right * _moveHor * _speed;
+        //if (_moveVert < 0) transform.localPosition += transform.right * _moveHor * _speed;
+        //if (_moveHor > 0) transform.localPosition += transform.forward * _moveVert * _speed;
+        //if (_moveHor < 0) transform.localPosition += transform.forward * _moveVert * _speed;
+        if (_moveHor !=0 || _moveVert !=0)
+        {
+            transform.localPosition += transform.right * _moveHor * _speed;
+            transform.localPosition += transform.forward * _moveVert * _speed;
+        }
         _roteHor = _joy_rotate.Horizontal;
         _roteVert = -_joy_rotate.Vertical;
         if (_roteVert != 0 || _roteHor != 0)
