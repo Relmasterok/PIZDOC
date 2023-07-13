@@ -19,7 +19,7 @@ public class MovePlayer : MonoBehaviour
     public float _speedROT;
 
     public Text _scoreTEXT;
-    private int score;
+    private int score = Random.Range(5, 12);
 
     private int random;
     public List<Transform> _points = new List<Transform>();
@@ -57,10 +57,15 @@ public class MovePlayer : MonoBehaviour
     {
         if (other.gameObject.tag == "Coin")
         {
-            score++;
+            score--;
             Destroy(other.gameObject);
             _scoreTEXT.text = score.ToString();
             _spawnCoin = false;
+
+            if (score == 0)
+            {
+                Application.LoadLevel("Menu");
+            }
         }
     }
 }
