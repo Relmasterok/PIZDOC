@@ -24,7 +24,7 @@ public class RoteCoins : MonoBehaviour
 
         transform.position = StartPos + new Vector3(0, Offset, 0);
 
-        transform.LookAt(player);
+        transform.Rotate(new Vector3(0, 0, 0.5f));
     }
 }
 

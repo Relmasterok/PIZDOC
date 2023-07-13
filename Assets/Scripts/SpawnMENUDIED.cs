@@ -17,7 +17,7 @@ public class SpawnMENUDIED : MonoBehaviour
     {
         DIED = GameObject.FindGameObjectWithTag("MainCamera");
         if (DIED == null)
-            Invoke("POS", 2f);
+            Invoke("POS", 2.5f);
     }
     private void POS()
     {
