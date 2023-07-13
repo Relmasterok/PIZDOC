@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class MovePlayer : MonoBehaviour
 {
@@ -20,16 +21,24 @@ public class MovePlayer : MonoBehaviour
     public Text _scoreTEXT;
     private int score;
 
+    private int random;
+    public List<Transform> _points = new List<Transform>();
+    public GameObject _coin;
+    private bool _spawnCoin = false;
 
 
     void FixedUpdate()
     {
+        if (!_spawnCoin) 
+        {
+            
+            random = Random.Range(0,_points.Count);
+            Instantiate(_coin, new Vector3(_points[random].position.x, _points[random].position.y+1.5f, _points[random].position.z), Quaternion.Euler(-90,0,0));
+            _points.RemoveAt(random);
+            _spawnCoin = true;
+        }
         _moveHor = _joy_speed.Horizontal;
         _moveVert = _joy_speed.Vertical;
-        //if (_moveVert > 0) transform.localPosition += transform.right * _moveHor * _speed;
-        //if (_moveVert < 0) transform.localPosition += transform.right * _moveHor * _speed;
-        //if (_moveHor > 0) transform.localPosition += transform.forward * _moveVert * _speed;
-        //if (_moveHor < 0) transform.localPosition += transform.forward * _moveVert * _speed;
         if (_moveHor !=0 || _moveVert !=0)
         {
             transform.localPosition += transform.right * _moveHor * _speed;
@@ -49,8 +58,9 @@ public class MovePlayer : MonoBehaviour
         if (other.gameObject.tag == "Coin")
         {
             score++;
-            other.gameObject.SetActive(false);
+            Destroy(other.gameObject);
             _scoreTEXT.text = score.ToString();
+            _spawnCoin = false;
         }
     }
 }
