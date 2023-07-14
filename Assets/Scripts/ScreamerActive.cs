@@ -7,7 +7,10 @@ public class ScreamerActive : MonoBehaviour {
 
 	void  OnTriggerStay(Collider other){
 		if(other.tag == "Player");
-        screamerScene.active = true; 
+        screamerScene.active = true;
+		int D = PlayerPrefs.GetInt("Died");
+		D++;
+		PlayerPrefs.SetInt("Died", D);
 
 	}
 }
