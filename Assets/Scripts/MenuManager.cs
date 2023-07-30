@@ -25,6 +25,6 @@ public class MenuManager : MonoBehaviour
 
     public void ExitMenu()
     {
-        Application.LoadLevel("Menu");
+        Application.LoadLevel(0);
     }
 }

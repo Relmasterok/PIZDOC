@@ -15,9 +15,9 @@ public class SpawnMENUDIED : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DIED = GameObject.FindGameObjectWithTag("MainCamera");
+        DIED = GameObject.FindGameObjectWithTag("Player");
         if (DIED == null)
-            Invoke("POS", 2.5f);
+            Invoke("POS", 2.3f);
     }
     private void POS()
     {
