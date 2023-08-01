@@ -17,6 +17,7 @@ public class MovePlayer : MonoBehaviour
 
     public Text _scoreTEXT;
     private int score;
+    private int scoreFACT = 0;
 
     private int random;
     public List<Transform> _points = new List<Transform>();
@@ -30,7 +31,7 @@ public class MovePlayer : MonoBehaviour
     }
     private void Start()
     {
-        _scoreTEXT.text = "осталось: " + score.ToString();
+        _scoreTEXT.text = scoreFACT.ToString() + "/" + score.ToString();
         if (PlayerPrefs.GetInt("Died") != null) died = PlayerPrefs.GetInt("Died");
         else PlayerPrefs.SetInt("Died", died);
         if (died == 2)
@@ -62,9 +63,9 @@ public class MovePlayer : MonoBehaviour
     {
         if (other.gameObject.tag == "Coin")
         {
-            score--;
+            scoreFACT++;
             Destroy(other.gameObject);
-            _scoreTEXT.text = "осталось: " + score.ToString();
+            _scoreTEXT.text = scoreFACT.ToString() + "/" + score.ToString();
             _spawnCoin = false;
         }
     }

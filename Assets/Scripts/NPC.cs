@@ -19,7 +19,7 @@ public class NPC : MonoBehaviour
     public float angle = 40;
     public Vector3 offset;
     public Transform target;
-
+    public GameObject Volume;
 
     private bool _Pogona = false;
     float _chaseRange = 10f;
@@ -86,9 +86,9 @@ public class NPC : MonoBehaviour
         if(_NPC.remainingDistance <= _NPC.stoppingDistance)
             _NPC.SetDestination(_points[Random.Range(0,_points.Count)].position);
         float dist = Vector3.Distance(transform.position, _PLAYER.position);
-        if (RayToScan()) _Pogona = true;
-        if (_Pogona) _NPC.SetDestination(_PLAYER.position);
-        if (!RayToScan()) _Pogona = false;
+        if (RayToScan())  _Pogona = true;
+        if (_Pogona) { _NPC.SetDestination(_PLAYER.position); Volume.active = true; }
+        if (!RayToScan()) { _Pogona = false; Volume.active = false; }
     }
-
+    
 }
