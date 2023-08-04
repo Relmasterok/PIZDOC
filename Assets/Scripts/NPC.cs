@@ -9,6 +9,7 @@ using UnityEngine.UIElements;
 
 public class NPC : MonoBehaviour
 {
+    
     private NavMeshAgent _NPC;
     public Transform _PLAYER;
     public List<Transform> _points = new List<Transform>();
@@ -87,8 +88,8 @@ public class NPC : MonoBehaviour
             _NPC.SetDestination(_points[Random.Range(0,_points.Count)].position);
         float dist = Vector3.Distance(transform.position, _PLAYER.position);
         if (RayToScan())  _Pogona = true;
-        if (_Pogona) { _NPC.SetDestination(_PLAYER.position); Volume.active = true; }
-        if (!RayToScan()) { _Pogona = false; Volume.active = false; }
+        if (_Pogona) { _NPC.SetDestination(_PLAYER.position); Volume.SetActive(true); }
+        if (!RayToScan()) { _Pogona = false; Volume.SetActive(false); }
     }
     
 }

@@ -5,6 +5,7 @@ using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class MovePlayer : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class MovePlayer : MonoBehaviour
     public float _speed;
     private float _moveHor;
     private float _moveVert;
-    
+
 
     public Text _scoreTEXT;
     private int score;
@@ -32,7 +33,7 @@ public class MovePlayer : MonoBehaviour
     private void Start()
     {
         _scoreTEXT.text = scoreFACT.ToString() + "/" + score.ToString();
-        if (PlayerPrefs.GetInt("Died") != null) died = PlayerPrefs.GetInt("Died");
+        if (PlayerPrefs.GetInt("Died") != 0) died = PlayerPrefs.GetInt("Died");
         else PlayerPrefs.SetInt("Died", died);
         if (died == 2)
         {
@@ -43,16 +44,19 @@ public class MovePlayer : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (!_spawnCoin) 
+        if (!_spawnCoin)
         {
-            random = Random.Range(0,_points.Count);
-            Instantiate(_coin, new Vector3(_points[random].position.x, _points[random].position.y+1.5f, _points[random].position.z), Quaternion.Euler(-90,0,0));
+            random = Random.Range(0, _points.Count);
+            Instantiate(_coin, new Vector3(_points[random].position.x, _points[random].position.y + 1.5f, _points[random].position.z), Quaternion.Euler(-90, 0, 0));
             _points.RemoveAt(random);
             _spawnCoin = true;
         }
-        _moveHor = _joy_speed.Horizontal;
-        _moveVert = _joy_speed.Vertical;
-        if (_moveHor !=0 || _moveVert !=0)
+    }
+    private void LateUpdate()
+    {
+        _moveHor = _joy_speed.Horizontal * Time.deltaTime;
+        _moveVert = _joy_speed.Vertical * Time.deltaTime;
+        if (_moveHor != 0 || _moveVert != 0)
         {
             transform.localPosition += transform.right * _moveHor * _speed;
             transform.localPosition += transform.forward * _moveVert * _speed;
@@ -64,9 +68,14 @@ public class MovePlayer : MonoBehaviour
         if (other.gameObject.tag == "Coin")
         {
             scoreFACT++;
+            if(scoreFACT == score) Application.LoadLevel(0);
             Destroy(other.gameObject);
             _scoreTEXT.text = scoreFACT.ToString() + "/" + score.ToString();
             _spawnCoin = false;
+        }
+        if (other.gameObject.tag == "Finish")
+        {
+            Application.LoadLevel(1);
         }
     }
 }

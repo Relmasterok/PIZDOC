@@ -18,20 +18,19 @@ public class RoteCam : MonoBehaviour
     }
 
 
-    void FixedUpdate()
+    void LateUpdate()
     {
-        _roteHor = _joy_rotate.Horizontal ;
-        _roteVert = -_joy_rotate.Vertical ;
+        _roteHor = _joy_rotate.Horizontal * Time.deltaTime;
+        _roteVert = -_joy_rotate.Vertical * Time.deltaTime;
         if (_Axes == RotAxes.RotY)
         {
             transform.Rotate(0, _roteHor * _speedROT, 0);
             transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0f);
-
         }
         if (_Axes == RotAxes.RotX)
         {
             transform.Rotate(_roteVert * _speedROT, 0, 0);
-            transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y + 0.5f, Player.transform.position.z);
+            transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y + 0.7f, Player.transform.position.z-0.5f);
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, Player.transform.eulerAngles.y, 0f);
         }
         if (_Axes == RotAxes.RotXY)
